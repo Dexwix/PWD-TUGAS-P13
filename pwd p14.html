@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Volume Bangun Ruang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgb(189, 255, 194);
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;s
+        }
+        button:hover {
+            background-color: #581f54;
+        }
+        .input-fields {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kalkulator Volume Bangun Ruang</h1>
+    
+    <div class="form-group">
+        <label>Pilih Bangun Ruang:</label>
+        <select id="bangunRuang" onchange="tampilkanInput()">
+            <option value="">-- Pilih --</option>
+            <option value="balok">Balok</option>
+            <option value="tabung">Tabung</option>
+            <option value="bola">Bola</option>
+            <option value="prisma">Prisma Segitiga</option>
+            <option value="kerucut">Kerucut</option>
+        </select>
+    </div>
+
+ 
+    <div id="balok-input" class="input-fields">
+        <div class="form-group">
+            <label>Panjang:</label>
+            <input type="number" id="balok-panjang">
+        </div>
+        <div class="form-group">
+            <label>Lebar:</label>
+            <input type="number" id="balok-lebar">
+        </div>
+        <div class="form-group">
+            <label>Tinggi:</label>
+            <input type="number" id="balok-tinggi">
+        </div>
+    </div>
+
+  
+    <div id="tabung-input" class="input-fields">
+        <div class="form-group">
+            <label>Jari jari:</label>
+            <input type="number" id="tabung-jejari">
+        </div>
+        <div class="form-group">
+            <label>Tinggi:</label>
+            <input type="number" id="tabung-tinggi">
+        </div>
+    </div>
+
+
+    <div id="bola-input" class="input-fields">
+        <div class="form-group">
+            <label>Jari jari:</label>
+            <input type="number" id="bola-jejari">
+        </div>
+    </div>
+
+  
+    <div id="prisma-input" class="input-fields">
+        <div class="form-group">
+            <label>Tinggi Alas:</label>
+            <input type="number" id="prisma-tinggi-alas">
+        </div>
+        <div class="form-group">
+            <label>Panjang Alas:</label>
+            <input type="number" id="prisma-panjang-alas">
+        </div>
+        <div class="form-group">
+            <label>Tinggi Prisma:</label>
+            <input type="number" id="prisma-tinggi">
+        </div>
+    </div>
+
+
+    <div id="kerucut-input" class="input-fields">
+        <div class="form-group">
+            <label>Jejari Alas:</label>
+            <input type="number" id="kerucut-jejari">
+        </div>
+        <div class="form-group">
+            <label>Tinggi Kerucut:</label>
+            <input type="number" id="kerucut-tinggi">
+        </div>
+    </div>
+
+    <button onclick="hitungVolume()">Hitung Volume</button>
+
+    <script>
+        function tampilkanInput() {
+       
+            var inputs = document.querySelectorAll('.input-fields');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].style.display = 'none';
+            }
+
+     
+            var pilihan = document.getElementById('bangunRuang').value;
+            if (pilihan) {
+                document.getElementById(pilihan + '-input').style.display = 'block';
+            }
+        }
+
+        function hitungVolume() {
+            var pilihan = document.getElementById('bangunRuang').value;
+            var volume = 0;
+            
+            if (!pilihan) {
+                alert('Pilih bangun ruang terlebih dahulu!');
+                return;
+            }
+
+            if (pilihan === 'balok') {
+                var p = parseFloat(document.getElementById('balok-panjang').value);
+                var l = parseFloat(document.getElementById('balok-lebar').value);
+                var t = parseFloat(document.getElementById('balok-tinggi').value);
+                volume = p * l * t;
+                alert('Volume Balok = ' + volume);
+            }
+            else if (pilihan === 'tabung') {
+                var r = parseFloat(document.getElementById('tabung-j').value);
+                var t = parseFloat(document.getElementById('tabung-tinggi').value);
+                volume = 3.14 * r * r * t;
+                alert('Volume Tabung = ' + volume);
+            }
+            else if (pilihan === 'bola') {
+                var r = parseFloat(document.getElementById('bola-jari jari').value);
+                volume = 3.14 * r * r * r;
+                alert('Volume Bola = ' + volume);
+            }
+            else if (pilihan === 'prisma') {
+                var ta = parseFloat(document.getElementById('prisma-tinggi-alas').value);
+                var pa = parseFloat(document.getElementById('prisma-panjang-alas').value);
+                var tp = parseFloat(document.getElementById('prisma-tinggi').value);
+                volume = 0.5 * ta * pa * tp;
+                alert('Volume Prisma Segitiga = ' + volume);
+            }
+            else if (pilihan === 'kerucut') {
+                var r = parseFloat(document.getElementById('kerucut-jari jari').value);
+                var t = parseFloat(document.getElementById('kerucut-tinggi').value);
+                volume = (1/3) * 3.14 * r * r * t;
+                alert('Volume Kerucut = ' + volume);
+            }
+        }
+    </script>
+</body>
+</html>
